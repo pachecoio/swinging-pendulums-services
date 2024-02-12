@@ -1,0 +1,6 @@
+[submodule "webapp"]
+	path = webapp
+	url = git@github.com:pachecoio/swinging-pendulums-webapp.git
+[submodule "backend"]
+	path = backend
+	url = git@github.com:pachecoio/swinging-pendulums.git

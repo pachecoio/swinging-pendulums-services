@@ -1,0 +1,45 @@
+version: "3.7"
+services:
+  pendulums:
+    image: thisk8brd/swinging-pendulums
+    build:
+      context: ./backend
+    container_name: swinging-pendulums
+    ports:
+      - 3000:3000
+      - 3001:3001
+      - 3002:3002
+      - 3003:3003
+      - 3004:3004
+      - 3005:3005
+    volumes:
+      - ./logs:/mosquitto/log
+      - ./data:/mosquitto/data
+    environment:
+      - MQTT_BROKER_URI=mqtt://broker:1883
+    networks:
+        - swinging-pendulums
+
+  webapp:
+    image: thisk8brd/swinging-pendulums-webapp
+    build:
+      context: ./webapp
+    container_name: swinging-pendulums-webapp
+    ports:
+      - 8080:80
+    networks:
+      - swinging-pendulums
+
+  broker:
+    image: eclipse-mosquitto
+    container_name: broker
+    ports:
+      - 1883:1883
+    volumes:
+      - ./backend/mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+        - swinging-pendulums
+
+networks:
+  swinging-pendulums:
+    name: swinging-pendulums
