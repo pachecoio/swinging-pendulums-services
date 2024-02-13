@@ -18,7 +18,7 @@ The web application provides a user-friendly interface to configure and visualiz
 1. Clone the repository.
 2. Fetch and update the submodules
     ```
-    git submodule update
+    git submodule update --init --recursive
     ```
 3. Run the application with Docker
     ```
